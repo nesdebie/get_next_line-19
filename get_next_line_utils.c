@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndebiesm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nedebies <nedebies@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/28 10:15:27 by ndebiesm          #+#    #+#             */
-/*   Updated: 2019/10/28 10:15:51 by ndebiesm         ###   ########.fr       */
+/*   Created: 2021/04/11 12:02:00 by nedebies          #+#    #+#             */
+/*   Updated: 2021/04/11 12:10:10 by nedebies         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-#include "get_next_line.h"
-
-static int		ft_strlen(char *str)
+static int	ft_strlen(char *str)
 {
 	int i;
 
@@ -32,7 +30,8 @@ char	*ft_strdup(char *str)
 	char	*result;
 
 	i = 0;
-	if (!(result = (char*)malloc((ft_strlen(str) + 1) * sizeof(char))))
+	result = (char*)malloc((ft_strlen(str) + 1) * sizeof(char));
+	if (!result)
 		return (NULL);
 	while (str[i] != '\0')
 	{
@@ -51,7 +50,8 @@ char	*ft_strjoin(char *line, char *buffer)
 
 	j = 0;
 	i = ft_strlen(line);
-	if (!(result = (char*)malloc((i + ft_strlen(buffer) + 1) * sizeof(char))))
+	result = (char*)malloc((i + ft_strlen(buffer) + 1) * sizeof(char));
+	if (!result)
 		return (NULL);
 	while (line[j] != '\0')
 	{
@@ -70,7 +70,7 @@ char	*ft_strjoin(char *line, char *buffer)
 	return (result);
 }
 
-int		ft_strchr(char *str, char c)
+int	ft_strchr(char *str, char c)
 {
 	int i;
 
@@ -96,7 +96,8 @@ char	*ft_substr(char *str, int start, int size)
 	i = ft_strlen(str);
 	if (start > i)
 		return (ft_strdup(""));
-	if (!(result = (char *)malloc((size + 1) * sizeof(char))))
+	result = (char *)malloc((size + 1) * sizeof(char));
+	if (!result)
 		return (NULL);
 	i = 0;
 	if (size > 0)

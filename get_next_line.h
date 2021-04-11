@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndebiesm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nedebies <nedebies@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 10:15:56 by ndebiesm          #+#    #+#             */
-/*   Updated: 2019/10/28 10:29:56 by ndebiesm         ###   ########.fr       */
+/*   Updated: 2021/04/11 12:00:12 by nedebies         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _GET_NEXT_LINE_H
-# define _GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
@@ -21,7 +21,6 @@
 # endif
 
 int		get_next_line(int fd, char **line);
-//int		ft_strlen(char *str);
 char	*ft_strdup(char *str);
 char	*ft_strjoin(char *line, char *buffer);
 int		ft_strchr(char *str, char c);
