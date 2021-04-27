@@ -6,16 +6,18 @@
 /*   By: nedebies <nedebies@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 12:04:00 by nedebies          #+#    #+#             */
-/*   Updated: 2021/04/27 14:32:39 by nedebies         ###   ########.fr       */
+/*   Updated: 2021/04/27 14:37:07 by nedebies         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	adjust_content(int fd, char **line, char **opened_files)
+static int	adjust_content(int ret, int fd, char **line, char **opened_files)
 {
 	int		check;
 
+	if (ret < 0)
+		return (-1);
 	check = ft_strchr(*line, '\n');
 	free(opened_files[fd]);
 	if (check != -1)
@@ -35,7 +37,7 @@ int	adjust_content(int fd, char **line, char **opened_files)
 	return (1);
 }
 
-int	read_line(int fd, char **line, char **opened_files)
+static int	read_line(int fd, char **line, char **opened_files)
 {
 	int		ret;
 	char	*buffer;
@@ -60,9 +62,7 @@ int	read_line(int fd, char **line, char **opened_files)
 		ret = read(fd, buffer, BUFFER_SIZE);
 	}
 	free(buffer);
-	if (ret < 0)
-		return (-1);
-	return (adjust_content(fd, line, opened_files));
+	return (adjust_content(ret, fd, line, opened_files));
 }
 
 int	get_next_line(int fd, char **line)
