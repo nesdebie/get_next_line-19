@@ -6,7 +6,7 @@
 /*   By: nedebies <nedebies@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 12:04:00 by nedebies          #+#    #+#             */
-/*   Updated: 2021/04/27 13:45:01 by nedebies         ###   ########.fr       */
+/*   Updated: 2021/04/27 14:32:39 by nedebies         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	read_line(int fd, char **line, char **opened_files)
 	char	*buffer;
 	int		check;
 
-	buffer = (char*)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 		return (-1);
 	*line = ft_strdup(opened_files[fd]);
@@ -51,7 +51,8 @@ int	read_line(int fd, char **line, char **opened_files)
 	while (ret > 0)
 	{
 		buffer[ret] = '\0';
-		if (!(*line = ft_strjoin(*line, buffer)))
+		*line = ft_strjoin(*line, buffer);
+		if (!*line)
 			return (-1);
 		check = ft_strchr(*line, '\n');
 		if (check != -1)

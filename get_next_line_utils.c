@@ -6,7 +6,7 @@
 /*   By: nedebies <nedebies@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 12:02:00 by nedebies          #+#    #+#             */
-/*   Updated: 2021/04/25 18:23:13 by nedebies         ###   ########.fr       */
+/*   Updated: 2021/04/27 14:31:17 by nedebies         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	ft_strlen(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] != '\0')
@@ -28,7 +28,7 @@ char	*ft_strdup(char *str)
 	char	*result;
 
 	i = 0;
-	result = (char*)malloc((ft_strlen(str) + 1) * sizeof(char));
+	result = (char *)malloc((ft_strlen(str) + 1) * sizeof(char));
 	if (!result)
 		return (NULL);
 	while (str[i] != '\0')
@@ -48,7 +48,7 @@ char	*ft_strjoin(char *line, char *buffer)
 
 	j = 0;
 	i = ft_strlen(line);
-	result = (char*)malloc((i + ft_strlen(buffer) + 1) * sizeof(char));
+	result = (char *)malloc((i + ft_strlen(buffer) + 1) * sizeof(char));
 	if (!result)
 		return (NULL);
 	while (line[j] != '\0')
@@ -70,7 +70,7 @@ char	*ft_strjoin(char *line, char *buffer)
 
 int	ft_strchr(char *str, char c)
 {
-	int i;
+	int	i;
 
 	if (!str)
 		return (-1);
