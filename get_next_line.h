@@ -6,7 +6,7 @@
 /*   By: nedebies <nedebies@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 10:15:56 by ndebiesm          #+#    #+#             */
-/*   Updated: 2021/04/11 12:00:12 by nedebies         ###   ########.fr       */
+/*   Updated: 2021/04/27 13:45:13 by nedebies         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <limits.h>
+# include <stdio.h>
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 32
 # endif

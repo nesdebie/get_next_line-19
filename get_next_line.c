@@ -6,7 +6,7 @@
 /*   By: nedebies <nedebies@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 12:04:00 by nedebies          #+#    #+#             */
-/*   Updated: 2021/04/11 12:09:39 by nedebies         ###   ########.fr       */
+/*   Updated: 2021/04/27 13:45:01 by nedebies         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ int	read_line(int fd, char **line, char **opened_files)
 
 int	get_next_line(int fd, char **line)
 {
-	static char		*opened_files[OPEN_MAX];
+	static char		*opened_files[FOPEN_MAX];
 
-	if (fd < 0 || fd > OPEN_MAX || !line)
+	if (fd < 0 || fd > FOPEN_MAX || !line)
 		return (-1);
 	if (BUFFER_SIZE < 1)
 		return (-1);

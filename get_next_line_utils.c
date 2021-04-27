@@ -6,7 +6,7 @@
 /*   By: nedebies <nedebies@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 12:02:00 by nedebies          #+#    #+#             */
-/*   Updated: 2021/04/11 12:10:10 by nedebies         ###   ########.fr       */
+/*   Updated: 2021/04/25 18:23:13 by nedebies         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ static int	ft_strlen(char *str)
 	int i;
 
 	i = 0;
-	if (!str)
-		return (i);
 	while (str[i] != '\0')
 		i++;
 	return (i);
