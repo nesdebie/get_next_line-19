@@ -6,11 +6,17 @@
 /*   By: nedebies <nedebies@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 12:04:00 by nedebies          #+#    #+#             */
-/*   Updated: 2021/04/27 14:37:07 by nedebies         ###   ########.fr       */
+/*   Updated: 2021/05/05 14:34:23 by nedebies         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+static int	freebuffer(char *buffer)
+{
+	free(buffer);
+	return (-1);
+}
 
 static int	adjust_content(int ret, int fd, char **line, char **opened_files)
 {
@@ -40,26 +46,26 @@ static int	adjust_content(int ret, int fd, char **line, char **opened_files)
 static int	read_line(int fd, char **line, char **opened_files)
 {
 	int		ret;
-	char	*buffer;
 	int		check;
+	char	*buffer;
 
-	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (-1);
 	*line = ft_strdup(opened_files[fd]);
 	if (!*line)
-		return (-1);
-	ret = read(fd, buffer, BUFFER_SIZE);
+		return (freebuffer(buffer));
+	ret = 1;
 	while (ret > 0)
 	{
+		ret = read(fd, buffer, BUFFER_SIZE);
 		buffer[ret] = '\0';
 		*line = ft_strjoin(*line, buffer);
 		if (!*line)
-			return (-1);
+			return (freebuffer(buffer));
 		check = ft_strchr(*line, '\n');
 		if (check != -1)
 			break ;
-		ret = read(fd, buffer, BUFFER_SIZE);
 	}
 	free(buffer);
 	return (adjust_content(ret, fd, line, opened_files));

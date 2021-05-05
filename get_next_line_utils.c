@@ -6,15 +6,15 @@
 /*   By: nedebies <nedebies@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 12:02:00 by nedebies          #+#    #+#             */
-/*   Updated: 2021/04/27 14:31:17 by nedebies         ###   ########.fr       */
+/*   Updated: 2021/04/30 15:34:27 by nedebies         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int	ft_strlen(char *str)
+static size_t	ft_strlen(char *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (str[i] != '\0')
@@ -24,7 +24,7 @@ static int	ft_strlen(char *str)
 
 char	*ft_strdup(char *str)
 {
-	int		i;
+	size_t	i;
 	char	*result;
 
 	i = 0;
@@ -42,8 +42,8 @@ char	*ft_strdup(char *str)
 
 char	*ft_strjoin(char *line, char *buffer)
 {
-	int		i;
-	int		j;
+	size_t	i;
+	size_t	j;
 	char	*result;
 
 	j = 0;
@@ -70,7 +70,7 @@ char	*ft_strjoin(char *line, char *buffer)
 
 int	ft_strchr(char *str, char c)
 {
-	int	i;
+	size_t	i;
 
 	if (!str)
 		return (-1);
