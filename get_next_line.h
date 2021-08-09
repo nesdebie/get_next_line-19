@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nedebies <nedebies@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/28 10:15:56 by ndebiesm          #+#    #+#             */
-/*   Updated: 2021/04/30 15:33:35 by nedebies         ###   ########.fr       */
+/*   Created: 2021/08/02 02:12:45 by nedebies          #+#    #+#             */
+/*   Updated: 2021/08/02 02:53:47 by nedebies         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 # define GET_NEXT_LINE_H
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
 # include <string.h>
-# ifndef BUFFER_SIZE
+#ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 32
-# endif
+#endif
 
-int		get_next_line(int fd, char **line);
-char	*ft_strdup(char *str);
-char	*ft_strjoin(char *line, char *buffer);
-int		ft_strchr(char *str, char c);
-char	*ft_substr(char *str, int start, int size);
+size_t	ft_strlen(const char *s);
+int     ft_strchr(char **str, size_t *c);
+char	*ft_strdup(const char *s1);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*get_next_line(int fd);
 
 #endif

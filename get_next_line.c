@@ -6,84 +6,75 @@
 /*   By: nedebies <nedebies@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 12:04:00 by nedebies          #+#    #+#             */
-/*   Updated: 2021/05/05 14:34:23 by nedebies         ###   ########.fr       */
+/*   Updated: 2021/08/02 02:54:16 by nedebies         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int	freebuffer(char *buffer)
+static void	ft_fill_static(char **opened_file, char **temp, char **buffer)
 {
-	free(buffer);
-	return (-1);
+	if (!*opened_file)
+		*opened_file = ft_strdup(*buffer);
+	else
+	{
+		*temp = ft_strdup(*opened_file);
+		free(*opened_file);
+		*opened_file = ft_strjoin(*temp, *buffer);
+		free(*temp);
+	}
 }
 
-static int	adjust_content(int ret, int fd, char **line, char **opened_files)
+static char	*ft_adjust_content(char **opened_file, size_t *i_new_line)
 {
-	int		check;
+	int		i;
+	char	*temp;
+	char	*line;
 
-	if (ret < 0)
-		return (-1);
-	check = ft_strchr(*line, '\n');
-	free(opened_files[fd]);
-	if (check != -1)
+	i = 0;
+	line = NULL;
+	if (!*opened_file)
+		return (NULL);
+	temp = ft_strdup(*opened_file);
+	if (ft_strchr(&*opened_file, &*i_new_line))
 	{
-		opened_files[fd] = ft_strdup(*line + check + 1);
-		if (!opened_files[fd])
-			return (-1);
-		*line = ft_substr(*line, 0, check);
-		if (!*line)
-			return (-1);
+		line = ft_substr(*opened_file, 0, *i_new_line + 1);
+		free(*opened_file);
+		*opened_file = ft_substr(temp, *i_new_line + 1, ft_strlen(temp));
 	}
 	else
 	{
-		opened_files[fd] = NULL;
-		return (0);
+		i = ft_strlen(temp);
+		if (i > 0)
+			line = ft_substr(temp, 0, i);
+		free(*opened_file);
+		*opened_file = NULL;
 	}
-	return (1);
+	free(temp);
+	return (line);
 }
 
-static int	read_line(int fd, char **line, char **opened_files)
+char	*get_next_line(int fd)
 {
-	int		ret;
-	int		check;
-	char	*buffer;
+	size_t		ret;
+	size_t		i_new_line;
+	static char	*opened_file;
+	char		*buffer;
+	char		*temp;
 
+	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, NULL, 0) != 0)
+		return (NULL);
 	buffer = malloc(BUFFER_SIZE + 1);
-	if (!buffer)
-		return (-1);
-	*line = ft_strdup(opened_files[fd]);
-	if (!*line)
-		return (freebuffer(buffer));
-	ret = 1;
+	ret = read(fd, buffer, BUFFER_SIZE);
+	i_new_line = 0;
 	while (ret > 0)
 	{
-		ret = read(fd, buffer, BUFFER_SIZE);
 		buffer[ret] = '\0';
-		*line = ft_strjoin(*line, buffer);
-		if (!*line)
-			return (freebuffer(buffer));
-		check = ft_strchr(*line, '\n');
-		if (check != -1)
+		ft_fill_static(&opened_file, &temp, &buffer);
+		if (ft_strchr(&opened_file, &i_new_line))
 			break ;
-	}
+		ret = read(fd, buffer, BUFFER_SIZE);
+	}	
 	free(buffer);
-	return (adjust_content(ret, fd, line, opened_files));
-}
-
-int	get_next_line(int fd, char **line)
-{
-	static char		*opened_files[FOPEN_MAX];
-
-	if (fd < 0 || fd > FOPEN_MAX || !line)
-		return (-1);
-	if (BUFFER_SIZE < 1)
-		return (-1);
-	if (!opened_files[fd])
-	{
-		opened_files[fd] = ft_strdup("");
-		if (!opened_files[fd])
-			return (-1);
-	}
-	return (read_line(fd, line, opened_files));
+	return (ft_adjust_content(&opened_file, &i_new_line));
 }
