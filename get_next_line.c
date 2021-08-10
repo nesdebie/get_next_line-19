@@ -6,26 +6,32 @@
 /*   By: nedebies <nedebies@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 12:04:00 by nedebies          #+#    #+#             */
-/*   Updated: 2021/08/02 02:54:16 by nedebies         ###   ########.fr       */
+/*   Updated: 2021/08/10 18:34:39 by nedebies         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static void	ft_fill_static(char **opened_file, char **temp, char **buffer)
+static int	find_nl_index(char *str, size_t *c)
 {
-	if (!*opened_file)
-		*opened_file = ft_strdup(*buffer);
-	else
+	size_t	i;
+
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i])
 	{
-		*temp = ft_strdup(*opened_file);
-		free(*opened_file);
-		*opened_file = ft_strjoin(*temp, *buffer);
-		free(*temp);
+		if (str[i] == '\n')
+		{
+			*c = i;
+			return (1);
+		}
+		i++;
 	}
+	return (0);
 }
 
-static char	*ft_adjust_content(char **opened_file, size_t *i_new_line)
+static char	*ft_adjust_content(char **opened_file, size_t i_new_line)
 {
 	int		i;
 	char	*temp;
@@ -36,11 +42,11 @@ static char	*ft_adjust_content(char **opened_file, size_t *i_new_line)
 	if (!*opened_file)
 		return (NULL);
 	temp = ft_strdup(*opened_file);
-	if (ft_strchr(&*opened_file, &*i_new_line))
+	if (find_nl_index(*opened_file, &i_new_line))
 	{
-		line = ft_substr(*opened_file, 0, *i_new_line + 1);
+		line = ft_substr(*opened_file, 0, i_new_line + 1);
 		free(*opened_file);
-		*opened_file = ft_substr(temp, *i_new_line + 1, ft_strlen(temp));
+		*opened_file = ft_substr(temp, i_new_line + 1, ft_strlen(temp));
 	}
 	else
 	{
@@ -60,21 +66,25 @@ char	*get_next_line(int fd)
 	size_t		i_new_line;
 	static char	*opened_file;
 	char		*buffer;
-	char		*temp;
 
 	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, NULL, 0) != 0)
 		return (NULL);
 	buffer = malloc(BUFFER_SIZE + 1);
+	if (!buffer)
+		return (NULL);
 	ret = read(fd, buffer, BUFFER_SIZE);
 	i_new_line = 0;
 	while (ret > 0)
 	{
 		buffer[ret] = '\0';
-		ft_fill_static(&opened_file, &temp, &buffer);
-		if (ft_strchr(&opened_file, &i_new_line))
+		if (!opened_file)
+			opened_file = ft_strdup(buffer);
+		else
+			opened_file = ft_strjoin(opened_file, buffer);
+		if (find_nl_index(opened_file, &i_new_line))
 			break ;
 		ret = read(fd, buffer, BUFFER_SIZE);
 	}	
 	free(buffer);
-	return (ft_adjust_content(&opened_file, &i_new_line));
+	return (ft_adjust_content(&opened_file, i_new_line));
 }

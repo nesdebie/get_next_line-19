@@ -6,13 +6,13 @@
 /*   By: nedebies <nedebies@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 14:16:23 by nedebies          #+#    #+#             */
-/*   Updated: 2021/08/02 02:54:03 by nedebies         ###   ########.fr       */
+/*   Updated: 2021/08/10 18:20:22 by nedebies         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strdup(const char *str)
+char	*ft_strdup(char *str)
 {
 	size_t	i;
 	char	*result;
@@ -30,35 +30,35 @@ char	*ft_strdup(const char *str)
 	return (result);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	size_t		i;
-	size_t		j;
-	char		*str;
+	size_t	i;
+	size_t	j;
+	char	*result;
 
-	str = 0;
-	i = 0;
 	j = 0;
-	if (!s1 || !s2)
+	i = ft_strlen(s1);
+	result = (char *)malloc((i + ft_strlen(s2) + 1) * sizeof(char));
+	if (!result)
 		return (NULL);
-	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!str)
-		return (NULL);
-	while (s1[i])
+	while (s1[j] != '\0')
 	{
-		str[i] = s1[i];
-		i++;
-	}
-	while (s2[j])
-	{
-		str[i + j] = s2[j];
+		result[j] = s1[j];
 		j++;
 	}
-	str[i + j] = '\0';
-	return (str);
+	i = 0;
+	while (s2[i] != '\0')
+	{
+		result[j] = s2[i];
+		i++;
+		j++;
+	}
+	result[j] = '\0';
+	free(s1);
+	return (result);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, unsigned int start, size_t len)
 {
 	size_t	i;
 	size_t	j;
@@ -86,7 +86,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (str);
 }
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen(char *s)
 {
 	int	i;
 
@@ -96,23 +96,4 @@ size_t	ft_strlen(const char *s)
 		i++;
 	}
 	return (i);
-}
-
-int	ft_strchr(char **str, size_t *c)
-{
-	size_t	i;
-
-	i = 0;
-	if (!*str)
-		return (0);
-	while ((*str)[i])
-	{
-		if ((*str)[i] == '\n')
-		{
-			*c = i;
-			return (1);
-		}
-		i++;
-	}
-	return (0);
 }
