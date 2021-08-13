@@ -6,11 +6,23 @@
 /*   By: nedebies <nedebies@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 14:16:23 by nedebies          #+#    #+#             */
-/*   Updated: 2021/08/10 18:20:22 by nedebies         ###   ########.fr       */
+/*   Updated: 2021/08/13 05:01:04 by nedebies         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+size_t	ft_strlen(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
 
 char	*ft_strdup(char *str)
 {
@@ -84,16 +96,4 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	}
 	str[j] = '\0';
 	return (str);
-}
-
-size_t	ft_strlen(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
 }
