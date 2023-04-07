@@ -32,13 +32,13 @@ char	*ft_strdup(char *str)
 	i = 0;
 	result = (char *)malloc((ft_strlen(str) + 1) * sizeof(char));
 	if (!result)
-		return (NULL);
-	while (str[i] != '\0')
+		return (0);
+	while (str[i])
 	{
 		result[i] = str[i];
 		i++;
 	}
-	result[i] = '\0';
+	result[i] = 0;
 	return (result);
 }
 
@@ -52,20 +52,20 @@ char	*ft_strjoin(char *s1, char *s2)
 	i = ft_strlen(s1);
 	result = (char *)malloc((i + ft_strlen(s2) + 1) * sizeof(char));
 	if (!result)
-		return (NULL);
-	while (s1[j] != '\0')
+		return (0);
+	while (s1[j])
 	{
 		result[j] = s1[j];
 		j++;
 	}
 	i = 0;
-	while (s2[i] != '\0')
+	while (s2[i])
 	{
 		result[j] = s2[i];
 		i++;
 		j++;
 	}
-	result[j] = '\0';
+	result[j] = 0;
 	free(s1);
 	return (result);
 }
@@ -87,13 +87,13 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 		len = ft_strlen(s + start);
 	str = malloc(sizeof(char) * (len + 1));
 	if (!str)
-		return (NULL);
+		return (0);
 	while (s[i] && (j < len))
 	{
 		str[j] = s[i];
 		i++;
 		j++;
 	}
-	str[j] = '\0';
+	str[j] = 0;
 	return (str);
 }

@@ -38,9 +38,9 @@ static char	*ft_adjust_content(char **opened_file, size_t i_new_line)
 	char	*line;
 
 	i = 0;
-	line = NULL;
+	line = 0;
 	if (!*opened_file)
-		return (NULL);
+		return (0);
 	temp = ft_strdup(*opened_file);
 	if (find_nl_index(*opened_file, &i_new_line))
 	{
@@ -54,7 +54,7 @@ static char	*ft_adjust_content(char **opened_file, size_t i_new_line)
 		if (i > 0)
 			line = ft_substr(temp, 0, i);
 		free(*opened_file);
-		*opened_file = NULL;
+		*opened_file = 0;
 	}
 	free(temp);
 	return (line);
@@ -67,11 +67,11 @@ char	*get_next_line(int fd)
 	static char	*opened_file;
 	char		*buffer;
 
-	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, NULL, 0) != 0)
-		return (NULL);
+	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, NULL, 0))
+		return (0);
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
-		return (NULL);
+		return (0);
 	ret = read(fd, buffer, BUFFER_SIZE);
 	i_new_line = 0;
 	while (ret > 0)
