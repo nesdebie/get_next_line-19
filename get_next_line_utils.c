@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nedebies <nedebies@student.s19.be>         +#+  +:+       +#+        */
+/*   By: nesdebie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/10 14:16:23 by nedebies          #+#    #+#             */
-/*   Updated: 2021/08/13 05:01:04 by nedebies         ###   ########.fr       */
+/*   Created: 2023/04/10 16:53:06 by nesdebie          #+#    #+#             */
+/*   Updated: 2023/04/10 16:56:46 by nesdebie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,11 @@
 
 size_t	ft_strlen(char *s)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (s[i] != '\0')
-	{
+	while (s[i])
 		i++;
-	}
 	return (i);
 }
 
@@ -28,16 +26,15 @@ char	*ft_strdup(char *str)
 {
 	size_t	i;
 	char	*result;
+	size_t	len;
 
-	i = 0;
-	result = (char *)malloc((ft_strlen(str) + 1) * sizeof(char));
+	i = -1;
+	len = ft_strlen(str);
+	result = (char *)malloc((len + 1) * sizeof(char));
 	if (!result)
 		return (0);
-	while (str[i])
-	{
+	while (str[++i])
 		result[i] = str[i];
-		i++;
-	}
 	result[i] = 0;
 	return (result);
 }

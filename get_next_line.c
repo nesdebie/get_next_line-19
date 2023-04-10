@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nedebies <nedebies@student.s19.be>         +#+  +:+       +#+        */
+/*   By: nesdebie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/11 12:04:00 by nedebies          #+#    #+#             */
-/*   Updated: 2021/08/13 04:53:08 by nedebies         ###   ########.fr       */
+/*   Created: 2023/04/10 16:52:36 by nesdebie          #+#    #+#             */
+/*   Updated: 2023/04/10 16:54:41 by nesdebie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char	*get_next_line(int fd)
 	i_new_line = 0;
 	while (ret > 0)
 	{
-		buffer[ret] = '\0';
+		buffer[ret] = 0;
 		if (!opened_file)
 			opened_file = ft_strdup(buffer);
 		else
