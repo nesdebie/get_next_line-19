@@ -6,7 +6,7 @@
 /*   By: nesdebie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 16:53:20 by nesdebie          #+#    #+#             */
-/*   Updated: 2023/04/11 12:14:57 by nesdebie         ###   ########.fr       */
+/*   Updated: 2023/04/13 18:54:20 by nesdebie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 # define GET_NEXT_LINE_BONUS_H
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
 
 size_t	ft_strlen(char *s);
-char	*ft_strdup(char *s1);
 char	*ft_strjoin(char *s1, char *s2);
-char	*ft_substr(char *s, unsigned int start, size_t len);
-char	*get_next_line(int fd);
+void	ft_bzero(void *str, size_t n);
+void	*ft_calloc(size_t count, size_t size);
+char	*ft_strchr(char const *str, int c);
 
+char	*get_next_line(int fd);
 #endif

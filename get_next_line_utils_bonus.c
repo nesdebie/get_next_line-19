@@ -6,7 +6,7 @@
 /*   By: nesdebie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 16:53:06 by nesdebie          #+#    #+#             */
-/*   Updated: 2023/04/11 12:15:11 by nesdebie         ###   ########.fr       */
+/*   Updated: 2023/04/13 18:55:13 by nesdebie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,49 @@ size_t	ft_strlen(char *s)
 	return (i);
 }
 
-char	*ft_strdup(char *str)
+char	*ft_strchr(char const *str, int c)
+{
+	char	my_c;
+
+	my_c = (char)c;
+	while (*str)
+	{
+		if (*str == my_c)
+			return ((char *)str);
+		str++;
+	}
+	if (!my_c)
+		return ((char *)str);
+	return (NULL);
+}
+
+void	ft_bzero(void *str, size_t n)
 {
 	size_t	i;
-	char	*result;
-	size_t	len;
 
-	i = -1;
-	len = ft_strlen(str);
-	result = (char *)malloc((len + 1) * sizeof(char));
-	if (!result)
+	i = 0;
+	while (i < n)
+	{
+		*(char *)str++ = 0;
+		i++;
+	}
+}
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*ptr;
+	size_t	range;
+
+	range = count * size;
+	if (size != 0 && (count != range / size))
 		return (0);
-	while (str[++i])
-		result[i] = str[i];
-	result[i] = 0;
-	return (result);
+	if (range == 0)
+		range = 1;
+	ptr = malloc(range);
+	if (!ptr)
+		return (0);
+	ft_bzero(ptr, range);
+	return (ptr);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
@@ -67,30 +95,3 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (result);
 }
 
-char	*ft_substr(char *s, unsigned int start, size_t len)
-{
-	size_t	i;
-	size_t	j;
-	char	*str;
-
-	i = start;
-	j = 0;
-	str = 0;
-	if (!s)
-		return (NULL);
-	if (start > ft_strlen(s))
-		return (ft_strdup(""));
-	if (len > ft_strlen(s + start))
-		len = ft_strlen(s + start);
-	str = malloc(sizeof(char) * (len + 1));
-	if (!str)
-		return (0);
-	while (s[i] && (j < len))
-	{
-		str[j] = s[i];
-		i++;
-		j++;
-	}
-	str[j] = 0;
-	return (str);
-}
