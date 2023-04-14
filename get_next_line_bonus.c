@@ -6,13 +6,13 @@
 /*   By: nesdebie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 16:52:36 by nesdebie          #+#    #+#             */
-/*   Updated: 2023/04/13 19:00:13 by nesdebie         ###   ########.fr       */
+/*   Updated: 2023/04/14 11:10:32 by nesdebie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-static char	*ft_next(char *buffer)
+static char	*ft_new_buffer(char *buffer)
 {
 	int		i;
 	int		j;
@@ -36,7 +36,7 @@ static char	*ft_next(char *buffer)
 	return (line);
 }
 
-static char	*ft_line(char *buffer)
+static char	*ft_get_line(char *buffer)
 {
 	char	*line;
 	int		i;
@@ -94,7 +94,7 @@ char	*get_next_line(int fd)
 	buffer[fd] = read_file(fd, buffer[fd]);
 	if (!buffer[fd])
 		return (NULL);
-	line = ft_line(buffer[fd]);
-	buffer[fd] = ft_next(buffer[fd]);
+	line = ft_get_line(buffer[fd]);
+	buffer[fd] = ft_new_buffer(buffer[fd]);
 	return (line);
 }
