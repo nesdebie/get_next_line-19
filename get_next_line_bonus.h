@@ -6,7 +6,7 @@
 /*   By: nesdebie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 16:53:20 by nesdebie          #+#    #+#             */
-/*   Updated: 2023/04/13 18:54:20 by nesdebie         ###   ########.fr       */
+/*   Updated: 2023/04/14 11:21:01 by nesdebie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_BONUS_H
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
+# include <sys/syslimits.h>
 
 size_t	ft_strlen(char *s);
 char	*ft_strjoin(char *s1, char *s2);

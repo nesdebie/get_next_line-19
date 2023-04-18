@@ -6,7 +6,7 @@
 /*   By: nesdebie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 16:53:06 by nesdebie          #+#    #+#             */
-/*   Updated: 2023/04/14 11:13:46 by nesdebie         ###   ########.fr       */
+/*   Updated: 2023/04/14 12:11:41 by nesdebie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_strchr(char const *str, int c)
 	}
 	if (!my_c)
 		return ((char *)str);
-	return (NULL);
+	return (0);
 }
 
 void	ft_bzero(void *str, size_t n)
