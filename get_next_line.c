@@ -10,12 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-static	char *ft_free(char *buffer)
+static	char	*ft_free(char *s1, char *s2)
 {
-	if (buffer)
-		free(buffer);
+	if (s1)
+		free(s1);
+	if (s2)
+		free(s2);
 	return (0);
 }
 
@@ -36,15 +38,11 @@ static char	*ft_new_buffer(char *buffer)
 	j = ft_strlen(buffer) - i;
 	line = ft_calloc((j + 1), sizeof(char));
 	if (!line)
-		return (ft_free(buffer));
+		return (ft_free(buffer, 0));
 	i++;
 	j = 0;
 	while (buffer[i])
-	{
-		line[j] = buffer[i];
-		j++;
-		i++;
-	}
+		line[j++] = buffer[i++];
 	free(buffer);
 	return (line);
 }
@@ -61,7 +59,7 @@ static char	*ft_get_line(char *buffer)
 		i++;
 	line = ft_calloc(i + 2, sizeof(char));
 	if (!line)
-		return (ft_free(buffer));
+		return (ft_free(buffer, 0));
 	i = 0;
 	while (buffer[i] && buffer[i] != '\n')
 	{
@@ -82,20 +80,17 @@ static char	*read_file(int fd, char *res)
 		res = ft_calloc(1, 1);
 	tmp = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!tmp)
-		return (ft_free(res));
+		return (ft_free(res, 0));
 	is_read = 1;
 	while (is_read > 0)
 	{
 		is_read = read(fd, tmp, BUFFER_SIZE);
 		if (is_read == -1)
-		{
-			free(tmp);
-			return (ft_free(res));
-		}
+			return (ft_free(res, tmp));
 		tmp[is_read] = 0;
 		res = ft_strjoin(res, tmp);
 		if (!res)
-			return(ft_free(res));
+			return (ft_free(tmp, 0));
 		if (ft_strchr(tmp, '\n'))
 			break ;
 	}
