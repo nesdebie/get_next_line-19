@@ -6,13 +6,13 @@
 /*   By: nesdebie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 16:52:36 by nesdebie          #+#    #+#             */
-/*   Updated: 2023/04/14 12:08:52 by nesdebie         ###   ########.fr       */
+/*   Updated: 2023/04/21 11:46:47 by nesdebie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-static	char	*ft_free(char *s1, char *s2)
+char	*ft_free(char *s1, char *s2)
 {
 	if (s1)
 		free(s1);
@@ -28,6 +28,8 @@ static char	*ft_new_buffer(char *buffer)
 	char	*line;
 
 	i = 0;
+	if (!buffer)
+		return (0);
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
 	if (!buffer[i])
@@ -78,6 +80,8 @@ static char	*read_file(int fd, char *res)
 
 	if (!res)
 		res = ft_calloc(1, 1);
+	if (!res)
+		return (0);
 	tmp = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!tmp)
 		return (ft_free(res, 0));

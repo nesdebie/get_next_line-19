@@ -77,7 +77,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	i = ft_strlen(s1);
 	result = (char *)malloc((i + ft_strlen(s2) + 1) * sizeof(char));
 	if (!result)
-		return (0);
+		return (ft_free(s1, 0));
 	while (s1[j])
 	{
 		result[j] = s1[j];
