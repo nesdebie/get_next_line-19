@@ -6,7 +6,7 @@
 /*   By: nesdebie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 16:52:36 by nesdebie          #+#    #+#             */
-/*   Updated: 2023/04/21 11:46:47 by nesdebie         ###   ########.fr       */
+/*   Updated: 2023/04/26 13:26:32 by nesdebie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,15 @@
 char	*ft_free(char *s1, char *s2)
 {
 	if (s1)
+	{
 		free(s1);
+		s1 = NULL;
+	}
 	if (s2)
+	{
 		free(s2);
+		s2 = NULL;
+	}
 	return (0);
 }
 
@@ -28,7 +34,7 @@ static char	*ft_new_buffer(char *buffer)
 	char	*line;
 
 	i = 0;
-	if (!buffer)
+	if (buffer == NULL)
 		return (0);
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
@@ -59,7 +65,9 @@ static char	*ft_get_line(char *buffer)
 		return (0);
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	line = ft_calloc(i + 2, sizeof(char));
+	if (ft_strchr(buffer, '\n'))
+		i++;
+	line = ft_calloc(i + 1, sizeof(char));
 	if (!line)
 		return (ft_free(buffer, 0));
 	i = 0;
@@ -107,8 +115,12 @@ char	*get_next_line(int fd)
 	static char	*buffer;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
+	{
 		return (0);
+		if (buffer)
+			return (ft_free(buffer, 0));
+	}
 	buffer = read_file(fd, buffer);
 	if (!buffer)
 		return (0);
